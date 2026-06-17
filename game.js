@@ -535,6 +535,7 @@ function esc(str) {
 
 // ── Controls ──────────────────────────────────────────────────────────────────
 document.addEventListener('keydown', (e) => {
+  if (document.activeElement.tagName === 'INPUT') return;
   switch (e.key) {
     case 'ArrowUp':    case 'w': case 'W': e.preventDefault(); movePlayer(-1,  0); break;
     case 'ArrowDown':  case 's': case 'S': e.preventDefault(); movePlayer( 1,  0); break;
