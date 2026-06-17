@@ -179,23 +179,24 @@ function checkCollisions() {
 }
 
 function killPlayer() {
+  if (g.playerDead || g.over) return;
+
   g.playerDead = true;
   g.deathTimer = 1.4;
   g.lives--;
   updateHUD();
 
   if (g.lives <= 0) {
+    g.lives = 0;
+    updateHUD();
+
     setTimeout(() => {
-      if (g.score > bestScore) {
-        bestScore = g.score;
-        localStorage.setItem('crossroad_best', bestScore);
-      }
-      g.running = false;
-      g.over = true;
+
       showGameOver();
     }, 1400);
   }
 }
+
 
 // ── Update ────────────────────────────────────────────────────────────────────
 function update(dt) {
@@ -428,21 +429,31 @@ function showScreen(id) {
 }
 
 function showGameOver() {
+  g.running = false;
+  g.over = true;
+
   document.getElementById('final-score').textContent = g.score;
-  document.getElementById('player-name').value = '';
-  document.getElementById('submit-score').disabled = false;
-  document.getElementById('submit-score').textContent = 'SUBMIT';
-  document.getElementById('name-entry').innerHTML = `
+
+  if (g.score > bestScore) {
+    bestScore = g.score;
+    localStorage.setItem('crossroad_best', bestScore);
+    updateHUD();
+  }
+
+  const nameEntry = document.getElementById('name-entry');
+
+  nameEntry.innerHTML = `
     <p id="rank-message">Enter your name to save your score!</p>
     <input type="text" id="player-name" placeholder="Enter your name" maxlength="20" autocomplete="off" spellcheck="false" />
     <button id="submit-score" class="btn primary">SUBMIT</button>
   `;
+
   showScreen('game-over-screen');
   bindSubmitBtn();
-
-  // Check if they made top 10
+ // Check if score is in top 10 and update message accordingly
   checkIfTop10(g.score);
 }
+
 
 function bindSubmitBtn() {
   document.getElementById('submit-score').addEventListener('click', async () => {
