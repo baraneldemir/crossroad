@@ -1,0 +1,8 @@
+{
+  "name": "crossroad",
+  "version": "1.0.0",
+  "description": "Crossroad game with leaderboard",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}

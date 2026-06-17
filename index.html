@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crossroad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>CROSSROAD</h1>
+    <p class="tagline">Cross the road. Beat the leaderboard.</p>
+  </header>
+
+  <main>
+    <div class="game-wrapper">
+      <div class="hud">
+        <div class="hud-item">
+          <span class="hud-label">SCORE</span>
+          <span class="hud-value" id="score">0</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">BEST</span>
+          <span class="hud-value" id="best">0</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">LEVEL</span>
+          <span class="hud-value" id="level">1</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">LIVES</span>
+          <span class="hud-value" id="lives">♥♥♥</span>
+        </div>
+      </div>
+
+      <div class="canvas-container">
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="start-screen" class="overlay">
+          <div class="overlay-content">
+            <div class="frog-icon">🐸</div>
+            <h2>CROSSROAD</h2>
+            <p>Guide your frog across the busy road to the finish line!</p>
+            <div class="key-hints">
+              <div class="key-row"><kbd>W</kbd> or <kbd>↑</kbd></div>
+              <div class="key-row">
+                <kbd>A</kbd> or <kbd>←</kbd>
+                <kbd>S</kbd> or <kbd>↓</kbd>
+                <kbd>D</kbd> or <kbd>→</kbd>
+              </div>
+              <p class="hint-mobile">Or use the buttons below • Swipe on canvas</p>
+            </div>
+            <button id="start-btn" class="btn primary">START GAME</button>
+          </div>
+        </div>
+
+        <div id="game-over-screen" class="overlay hidden">
+          <div class="overlay-content">
+            <h2>GAME OVER</h2>
+            <p class="final-score-label">SCORE</p>
+            <p class="final-score-value" id="final-score">0</p>
+            <div id="name-entry" class="name-entry">
+              <p id="rank-message">Submit your score!</p>
+              <input type="text" id="player-name" placeholder="Enter your name" maxlength="20" autocomplete="off" spellcheck="false" />
+              <button id="submit-score" class="btn primary">SUBMIT</button>
+            </div>
+            <button id="play-again" class="btn secondary">PLAY AGAIN</button>
+          </div>
+        </div>
+
+        <div id="level-up-flash" class="level-flash hidden"></div>
+      </div>
+
+      <div class="mobile-controls">
+        <button class="ctrl-btn" data-dir="up">▲</button>
+        <div class="ctrl-row-mid">
+          <button class="ctrl-btn" data-dir="left">◄</button>
+          <button class="ctrl-btn" data-dir="down">▼</button>
+          <button class="ctrl-btn" data-dir="right">►</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="leaderboard-panel">
+      <h2>🏆 TOP 10</h2>
+      <div id="leaderboard-content">
+        <p class="lb-loading">Loading scores…</p>
+      </div>
+    </aside>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
